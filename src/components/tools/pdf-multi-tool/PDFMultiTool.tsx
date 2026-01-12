@@ -414,7 +414,6 @@ export function PDFMultiTool({ className = '' }: PDFMultiToolProps) {
           accept={['application/pdf', '.pdf']}
           multiple={false}
           maxFiles={1}
-          maxSize={500 * 1024 * 1024}
           onFilesSelected={handleFilesSelected}
           onError={handleUploadError}
           disabled={isProcessing}

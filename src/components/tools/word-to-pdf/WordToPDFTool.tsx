@@ -154,7 +154,6 @@ export function WordToPDFTool({ className = '' }: WordToPDFToolProps) {
                 accept={['.docx', '.doc', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/msword']}
                 multiple={false}
                 maxFiles={1}
-                maxSize={100 * 1024 * 1024} // 100MB
                 onFilesSelected={handleFilesSelected}
                 onError={handleUploadError}
                 disabled={isProcessing}

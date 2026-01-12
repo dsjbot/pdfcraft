@@ -123,7 +123,6 @@ export function ExcelToPDFTool({ className = '' }: ExcelToPDFToolProps) {
                 accept={['.xlsx', '.xls', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.ms-excel']}
                 multiple={false}
                 maxFiles={1}
-                maxSize={100 * 1024 * 1024}
                 onFilesSelected={handleFilesSelected}
                 onError={handleUploadError}
                 disabled={isProcessing}

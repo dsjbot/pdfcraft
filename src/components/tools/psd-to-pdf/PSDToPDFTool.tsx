@@ -293,7 +293,6 @@ export function PSDToPDFTool({ className = '' }: PSDToPDFToolProps) {
                 accept={acceptedTypes}
                 multiple
                 maxFiles={100}
-                maxSize={500 * 1024 * 1024}
                 onFilesSelected={handleFilesSelected}
                 onError={handleUploadError}
                 disabled={isProcessing}

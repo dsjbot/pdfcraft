@@ -37,7 +37,7 @@ export interface FileUploaderProps {
 export const FileUploader: React.FC<FileUploaderProps> = ({
   accept = ['application/pdf'],
   multiple = false,
-  maxSize = 100 * 1024 * 1024, // 100MB default
+  maxSize = Infinity, // No limit by default
   maxFiles = 10,
   onFilesSelected,
   onError,
@@ -76,8 +76,8 @@ export const FileUploader: React.FC<FileUploaderProps> = ({
     }
 
     for (const file of files) {
-      // Check file size
-      if (file.size > maxSize) {
+      // Check file size (skip if no limit)
+      if (maxSize !== Infinity && file.size > maxSize) {
         const maxSizeMB = Math.round(maxSize / (1024 * 1024));
         errors.push(tErrors('fileTooLarge', { maxSize: maxSizeMB }));
         continue;
@@ -338,20 +338,14 @@ export const FileUploader: React.FC<FileUploaderProps> = ({
         )}
       </div>
 
-      {/* File type hint */}
-      <div className="mt-6 flex flex-wrap gap-2 justify-center">
-        <span className="text-xs px-2 py-1 rounded-md bg-[hsl(var(--color-muted))] text-[hsl(var(--color-muted-foreground))]">
-          {accept.length <= 3 ? accept.join(', ') : `${accept.length} formats`}
-        </span>
-        <span className="text-xs px-2 py-1 rounded-md bg-[hsl(var(--color-muted))] text-[hsl(var(--color-muted-foreground))]">
-          Max {Math.round(maxSize / (1024 * 1024))}MB
-        </span>
-        {multiple && (
+      {/* File info hints - only show when multiple files allowed */}
+      {multiple && (
+        <div className="mt-6 flex flex-wrap gap-2 justify-center">
           <span className="text-xs px-2 py-1 rounded-md bg-[hsl(var(--color-muted))] text-[hsl(var(--color-muted-foreground))]">
             Files: {maxFiles}
           </span>
-        )}
-      </div>
+        </div>
+      )}
 
       {/* Drag overlay */}
       {isDragging && (

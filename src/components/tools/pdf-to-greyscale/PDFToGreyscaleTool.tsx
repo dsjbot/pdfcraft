@@ -192,7 +192,6 @@ export function PDFToGreyscaleTool({ className = '' }: PDFToGreyscaleToolProps) 
         accept={['application/pdf', '.pdf']}
         multiple={false}
         maxFiles={1}
-        maxSize={100 * 1024 * 1024}
         onFilesSelected={handleFilesSelected}
         onError={handleUploadError}
         disabled={isProcessing}

@@ -190,7 +190,6 @@ export function RemoveRestrictionsTool({ className = '' }: RemoveRestrictionsToo
         accept={['application/pdf', '.pdf']}
         multiple={false}
         maxFiles={1}
-        maxSize={100 * 1024 * 1024} // 100MB
         onFilesSelected={handleFilesSelected}
         onError={handleUploadError}
         disabled={isProcessing}

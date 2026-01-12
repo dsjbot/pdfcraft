@@ -52,7 +52,7 @@ export function FormFillerTool({ className = '' }: FormFillerToolProps) {
 
   return (
     <div className={`space-y-6 ${className}`.trim()}>
-      {!file && <FileUploader accept={['application/pdf', '.pdf']} multiple={false} maxFiles={1} maxSize={100 * 1024 * 1024} onFilesSelected={handleFilesSelected} onError={setError} disabled={isProcessing} label="Upload PDF Form" description="Drag and drop a PDF form here." />}
+      {!file && <FileUploader accept={['application/pdf', '.pdf']} multiple={false} maxFiles={1} onFilesSelected={handleFilesSelected} onError={setError} disabled={isProcessing} label="Upload PDF Form" description="Drag and drop a PDF form here." />}
       {error && <div className="p-4 rounded bg-red-50 border border-red-200 text-red-700"><p className="text-sm">{error}</p></div>}
       {file && (
         <>

@@ -169,7 +169,6 @@ export function PDFsToZipTool({ className = '' }: PDFsToZipToolProps) {
         accept={['application/pdf', '.pdf']}
         multiple
         maxFiles={100}
-        maxSize={500 * 1024 * 1024} // 500MB total
         onFilesSelected={handleFilesSelected}
         onError={handleUploadError}
         disabled={isProcessing}

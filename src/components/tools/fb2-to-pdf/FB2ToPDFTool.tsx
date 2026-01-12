@@ -131,7 +131,6 @@ export function FB2ToPDFTool({ className = '' }: FB2ToPDFToolProps) {
                 accept={['.fb2', '.fb2.zip', 'application/x-fictionbook+xml']}
                 multiple={true}
                 maxFiles={20}
-                maxSize={100 * 1024 * 1024}
                 onFilesSelected={handleFilesSelected}
                 onError={handleUploadError}
                 disabled={isProcessing}

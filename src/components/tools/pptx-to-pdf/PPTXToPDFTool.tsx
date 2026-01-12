@@ -123,7 +123,6 @@ export function PPTXToPDFTool({ className = '' }: PPTXToPDFToolProps) {
                 accept={['.pptx', '.ppt', 'application/vnd.openxmlformats-officedocument.presentationml.presentation', 'application/vnd.ms-powerpoint']}
                 multiple={false}
                 maxFiles={1}
-                maxSize={100 * 1024 * 1024}
                 onFilesSelected={handleFilesSelected}
                 onError={handleUploadError}
                 disabled={isProcessing}

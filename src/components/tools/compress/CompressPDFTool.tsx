@@ -150,7 +150,6 @@ export function CompressPDFTool({ className = '' }: CompressPDFToolProps) {
         accept={['application/pdf', '.pdf']}
         multiple={true}
         maxFiles={10}
-        maxSize={500 * 1024 * 1024} // 500MB
         onFilesSelected={handleFilesSelected}
         onError={handleUploadError}
         disabled={isProcessing}

@@ -261,7 +261,6 @@ export function ImageToPDFTool({ className = '', imageType }: ImageToPDFToolProp
         accept={getAcceptedTypes()}
         multiple
         maxFiles={100}
-        maxSize={100 * 1024 * 1024}
         onFilesSelected={handleFilesSelected}
         onError={handleUploadError}
         disabled={isProcessing}

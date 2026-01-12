@@ -52,8 +52,8 @@ export function validateFile(
     return { valid: false, errors };
   }
 
-  // Check file size
-  if (opts.maxSize && file.size > opts.maxSize) {
+  // Check file size (skip if no limit)
+  if (opts.maxSize && opts.maxSize !== Infinity && file.size > opts.maxSize) {
     const maxSizeMB = Math.round(opts.maxSize / (1024 * 1024));
     errors.push(createValidationError(
       PDFErrorCode.FILE_TOO_LARGE,
@@ -102,7 +102,7 @@ export async function validatePdfStructure(file: File): Promise<ValidationResult
   try {
     // Read the first few bytes to check PDF magic bytes
     const headerBytes = await readFileHeader(file, 8);
-    
+
     if (!isPdfHeader(headerBytes)) {
       errors.push(createValidationError(
         PDFErrorCode.FILE_NOT_PDF,
@@ -181,13 +181,13 @@ async function readFileAsText(file: File, start: number, end: number): Promise<s
  */
 function isPdfHeader(bytes: Uint8Array): boolean {
   if (bytes.length < 5) return false;
-  
+
   // Check for %PDF-
   return bytes[0] === 0x25 && // %
-         bytes[1] === 0x50 && // P
-         bytes[2] === 0x44 && // D
-         bytes[3] === 0x46 && // F
-         bytes[4] === 0x2D;   // -
+    bytes[1] === 0x50 && // P
+    bytes[2] === 0x44 && // D
+    bytes[3] === 0x46 && // F
+    bytes[4] === 0x2D;   // -
 }
 
 /**
@@ -195,16 +195,16 @@ function isPdfHeader(bytes: Uint8Array): boolean {
  */
 function extractPdfVersion(bytes: Uint8Array): string | null {
   if (bytes.length < 8) return null;
-  
+
   // Convert bytes 5-7 to string (version number like "1.7")
   const versionBytes = bytes.slice(5, 8);
   const version = String.fromCharCode(...versionBytes).trim();
-  
+
   // Validate version format (e.g., "1.7", "2.0")
   if (/^\d\.\d/.test(version)) {
     return version;
   }
-  
+
   return null;
 }
 
@@ -216,7 +216,7 @@ async function checkPdfEofMarker(file: File): Promise<boolean> {
     // Read the last 1024 bytes
     const tailSize = Math.min(1024, file.size);
     const tail = await readFileAsText(file, file.size - tailSize, file.size);
-    
+
     // Look for %%EOF marker
     return tail.includes('%%EOF');
   } catch {
@@ -246,11 +246,11 @@ function createValidationError(
  */
 export function formatFileSize(bytes: number): string {
   if (bytes === 0) return '0 Bytes';
-  
+
   const k = 1024;
   const sizes = ['Bytes', 'KB', 'MB', 'GB'];
   const i = Math.floor(Math.log(bytes) / Math.log(k));
-  
+
   return `${parseFloat((bytes / Math.pow(k, i)).toFixed(2))} ${sizes[i]}`;
 }
 
@@ -267,15 +267,15 @@ export function getFileExtension(filename: string): string {
  * Check if file is a PDF by extension
  */
 export function isPdfFile(file: File): boolean {
-  return file.type === 'application/pdf' || 
-         file.name.toLowerCase().endsWith('.pdf');
+  return file.type === 'application/pdf' ||
+    file.name.toLowerCase().endsWith('.pdf');
 }
 
 /**
  * Check if file is an image
  */
 export function isImageFile(file: File): boolean {
-  return SUPPORTED_FILE_TYPES.IMAGES.some(type => 
+  return SUPPORTED_FILE_TYPES.IMAGES.some(type =>
     file.type === type || file.type.startsWith('image/')
   );
 }

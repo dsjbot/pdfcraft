@@ -5,15 +5,15 @@
  * Packages multiple PDF files into a ZIP archive.
  */
 
-import type { 
-  PDFProcessor, 
-  ProcessInput, 
-  ProcessOutput, 
-  PDFError, 
+import type {
+  PDFProcessor,
+  ProcessInput,
+  ProcessOutput,
+  PDFError,
   ProgressCallback,
   ValidationResult,
   PDFErrorCode,
-  ErrorCategory 
+  ErrorCategory
 } from '@/types/pdf';
 
 export interface PDFToZipOptions {
@@ -52,7 +52,7 @@ export class PDFToZipProcessor implements PDFProcessor {
       const zip = new JSZip();
 
       const totalFiles = files.length;
-      
+
       // Add each PDF file to the ZIP
       for (let i = 0; i < files.length; i++) {
         if (this.cancelled) {
@@ -69,7 +69,7 @@ export class PDFToZipProcessor implements PDFProcessor {
 
         const file = files[i];
         const arrayBuffer = await file.arrayBuffer();
-        
+
         // Add file to ZIP with original filename
         zip.file(file.name, arrayBuffer);
 
@@ -80,7 +80,7 @@ export class PDFToZipProcessor implements PDFProcessor {
 
       // Generate the ZIP file
       onProgress?.(85, 'Compressing files...');
-      
+
       const compressionLevel = zipOptions.compressionLevel ?? 6;
       const zipBlob = await zip.generateAsync({
         type: 'blob',
@@ -136,16 +136,7 @@ export class PDFToZipProcessor implements PDFProcessor {
         });
       }
 
-      // Check file size (500MB limit)
-      const maxSize = 500 * 1024 * 1024;
-      if (file.size > maxSize) {
-        errors.push({
-          code: 'FILE_TOO_LARGE' as PDFErrorCode,
-          message: `File "${file.name}" exceeds maximum limit of 500MB`,
-          category: 'FILE_ERROR' as ErrorCategory,
-          recoverable: true,
-        });
-      }
+      // File size limit removed - no restriction
     }
 
     return {

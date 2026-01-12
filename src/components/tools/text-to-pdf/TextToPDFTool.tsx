@@ -177,7 +177,7 @@ export function TextToPDFTool({ className = '' }: TextToPDFToolProps) {
       {/* Upload Mode */}
       {inputMode === 'upload' && (
         <>
-          <FileUploader accept={['text/plain', '.txt']} multiple maxFiles={10} maxSize={10 * 1024 * 1024}
+          <FileUploader accept={['text/plain', '.txt']} multiple maxFiles={10}
             onFilesSelected={handleFilesSelected} onError={handleUploadError} disabled={isProcessing}
             label={tTools('txtToPdf.uploadLabel') || 'Upload Text Files'}
             description={tTools('txtToPdf.uploadDescription') || 'Drag and drop text files here, or click to browse.'} />

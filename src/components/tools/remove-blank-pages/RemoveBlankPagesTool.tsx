@@ -39,7 +39,7 @@ export function RemoveBlankPagesTool({ className = '' }: RemoveBlankPagesToolPro
 
   return (
     <div className={`space-y-6 ${className}`.trim()}>
-      {!file && <FileUploader accept={['application/pdf', '.pdf']} multiple={false} maxFiles={1} maxSize={100 * 1024 * 1024} onFilesSelected={(files) => { if (files.length > 0) { setFile(files[0]); setError(null); setResult(null); } }} onError={setError} disabled={isProcessing} label="Upload PDF File" description="Drag and drop a PDF file here." />}
+      {!file && <FileUploader accept={['application/pdf', '.pdf']} multiple={false} maxFiles={1} onFilesSelected={(files) => { if (files.length > 0) { setFile(files[0]); setError(null); setResult(null); } }} onError={setError} disabled={isProcessing} label="Upload PDF File" description="Drag and drop a PDF file here." />}
       {error && <div className="p-4 rounded bg-red-50 border border-red-200 text-red-700"><p className="text-sm">{error}</p></div>}
       {file && (
         <>

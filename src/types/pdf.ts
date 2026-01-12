@@ -24,7 +24,7 @@ export enum PDFErrorCode {
   FILE_CORRUPTED = 'FILE_CORRUPTED',
   FILE_EMPTY = 'FILE_EMPTY',
   FILE_NOT_PDF = 'FILE_NOT_PDF',
-  
+
   // Processing errors
   PDF_ENCRYPTED = 'PDF_ENCRYPTED',
   PDF_MALFORMED = 'PDF_MALFORMED',
@@ -32,16 +32,16 @@ export enum PDFErrorCode {
   PROCESSING_CANCELLED = 'PROCESSING_CANCELLED',
   PROCESSING_FAILED = 'PROCESSING_FAILED',
   INVALID_PASSWORD = 'INVALID_PASSWORD',
-  
+
   // Browser errors
   MEMORY_EXCEEDED = 'MEMORY_EXCEEDED',
   WORKER_FAILED = 'WORKER_FAILED',
   BROWSER_NOT_SUPPORTED = 'BROWSER_NOT_SUPPORTED',
-  
+
   // Validation errors
   INVALID_PAGE_RANGE = 'INVALID_PAGE_RANGE',
   INVALID_OPTIONS = 'INVALID_OPTIONS',
-  
+
   // Unknown
   UNKNOWN = 'UNKNOWN',
 }
@@ -120,13 +120,13 @@ export type ProgressCallback = (progress: number, message?: string) => void;
 export interface PDFProcessor {
   /** Process the input files */
   process(input: ProcessInput, onProgress?: ProgressCallback): Promise<ProcessOutput>;
-  
+
   /** Validate input files before processing */
   validate(files: File[]): Promise<ValidationResult>;
-  
+
   /** Get current processing progress (0-100) */
   getProgress(): number;
-  
+
   /** Cancel ongoing processing */
   cancel(): void;
 }
@@ -205,7 +205,7 @@ export interface CompressOptions {
  * Default file size limits
  */
 export const FILE_SIZE_LIMITS = {
-  DEFAULT_MAX_SIZE: 100 * 1024 * 1024, // 100MB
+  DEFAULT_MAX_SIZE: Infinity, // No limit
   LARGE_FILE_THRESHOLD: 50 * 1024 * 1024, // 50MB
   SMALL_FILE_THRESHOLD: 5 * 1024 * 1024, // 5MB
 } as const;

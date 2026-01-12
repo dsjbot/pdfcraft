@@ -81,7 +81,6 @@ export function RepairPDFTool({ className = '' }: RepairPDFToolProps) {
                     accept={['application/pdf', '.pdf']}
                     multiple={true}
                     maxFiles={10}
-                    maxSize={500 * 1024 * 1024}
                     onFilesSelected={handleFilesSelected}
                     onError={setError}
                     disabled={isProcessing}

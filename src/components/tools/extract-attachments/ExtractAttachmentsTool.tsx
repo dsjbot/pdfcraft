@@ -186,7 +186,6 @@ export function ExtractAttachmentsTool({ className = '' }: ExtractAttachmentsToo
         accept={['application/pdf', '.pdf']}
         multiple
         maxFiles={20}
-        maxSize={100 * 1024 * 1024}
         onFilesSelected={handleFilesSelected}
         onError={handleUploadError}
         disabled={isProcessing}

@@ -227,7 +227,6 @@ export function AlternateMergeTool({ className = '' }: AlternateMergeToolProps) 
         accept={['application/pdf', '.pdf']}
         multiple
         maxFiles={10}
-        maxSize={500 * 1024 * 1024} // 500MB total
         onFilesSelected={handleFilesSelected}
         onError={handleUploadError}
         disabled={isProcessing}

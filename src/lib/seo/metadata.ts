@@ -52,7 +52,7 @@ export function getAlternateUrls(path: string = ''): Record<string, string> {
   const cleanPath = path.startsWith('/') ? path : `/${path}`;
   const alternates: Record<string, string> = {};
 
-  const locales: Locale[] = ['en', 'ja', 'ko', 'es', 'fr', 'de', 'zh', 'pt'];
+  const locales: Locale[] = ['en', 'ja', 'ko', 'es', 'fr', 'de', 'zh', 'zh-TW', 'pt'];
   for (const locale of locales) {
     alternates[locale] = `${siteConfig.url}/${locale}${cleanPath}`;
   }
@@ -244,6 +244,7 @@ export function getOpenGraphLocale(locale: Locale): string {
     fr: 'fr_FR',
     de: 'de_DE',
     zh: 'zh_CN',
+    'zh-TW': 'zh_TW',
     pt: 'pt_BR',
   };
   return ogLocaleMap[locale] || 'en_US';

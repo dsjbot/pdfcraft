@@ -195,7 +195,6 @@ export function JSONToPDFTool({ className = '' }: JSONToPDFToolProps) {
         accept={['application/json', '.json']}
         multiple
         maxFiles={10}
-        maxSize={10 * 1024 * 1024}
         onFilesSelected={handleFilesSelected}
         onError={handleUploadError}
         disabled={isProcessing}

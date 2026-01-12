@@ -238,6 +238,7 @@ export function generateWebPageSchema(
     fr: 'fr-FR',
     de: 'de-DE',
     zh: 'zh-CN',
+    'zh-TW': 'zh-TW',
     pt: 'pt-BR',
   };
 

@@ -56,7 +56,6 @@ export function TextColorTool({ className = '' }: TextColorToolProps) {
           accept={['application/pdf', '.pdf']} 
           multiple={false} 
           maxFiles={1} 
-          maxSize={100 * 1024 * 1024} 
           onFilesSelected={(files) => { if (files.length > 0) { setFile(files[0]); setError(null); setResult(null); } }} 
           onError={setError} 
           disabled={isProcessing} 

@@ -187,7 +187,6 @@ export function AddAttachmentsTool({ className = '' }: AddAttachmentsToolProps) 
           accept={['application/pdf', '.pdf']}
           multiple={false}
           maxFiles={1}
-          maxSize={100 * 1024 * 1024}
           onFilesSelected={handlePdfSelected}
           onError={handleUploadError}
           disabled={isProcessing}
@@ -233,7 +232,6 @@ export function AddAttachmentsTool({ className = '' }: AddAttachmentsToolProps) 
           accept={['*/*']}
           multiple
           maxFiles={50}
-          maxSize={50 * 1024 * 1024}
           onFilesSelected={handleAttachmentsSelected}
           onError={handleUploadError}
           disabled={isProcessing}
