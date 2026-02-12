@@ -29,6 +29,7 @@
 import { WorkerBrowserConverter } from '@matbee/libreoffice-converter/browser';
 
 const LIBREOFFICE_PATH = '/libreoffice-wasm/';
+const ASSET_VERSION = '20240212-3';
 
 export interface LoadProgress {
     phase: 'loading' | 'initializing' | 'converting' | 'complete' | 'ready';
@@ -73,11 +74,11 @@ export class LibreOfficeConverter {
             progressCallback?.({ phase: 'loading', percent: 5, message: 'Loading conversion engine...' });
 
             this.converter = new WorkerBrowserConverter({
-                sofficeJs: `${this.basePath}soffice.js`,
-                sofficeWasm: `${this.basePath}soffice.wasm`,
-                sofficeData: `${this.basePath}soffice.data`,
-                sofficeWorkerJs: `${this.basePath}soffice.worker.js`,
-                browserWorkerJs: `${this.basePath}browser.worker.global.js`,
+                sofficeJs: `${this.basePath}soffice.js?v=${ASSET_VERSION}`,
+                sofficeWasm: `${this.basePath}soffice.wasm?v=${ASSET_VERSION}`,
+                sofficeData: `${this.basePath}soffice.data?v=${ASSET_VERSION}`,
+                sofficeWorkerJs: `${this.basePath}soffice.worker.js?v=${ASSET_VERSION}`,
+                browserWorkerJs: `${this.basePath}browser.worker.global.js?v=${ASSET_VERSION}`,
                 verbose: false,
                 onProgress: (info: { phase: string; percent: number; message: string }) => {
                     if (progressCallback && !this.initialized) {
@@ -159,7 +160,7 @@ export class LibreOfficeConverter {
             'browser.worker.global.js',
         ];
         for (const file of files) {
-            const url = `${this.basePath}${file}`;
+            const url = `${this.basePath}${file}?v=${ASSET_VERSION}`;
             try {
                 const start = performance.now();
                 const res = await fetch(url, { method: 'HEAD' });
